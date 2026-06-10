@@ -105,7 +105,7 @@ header h1 {
 
 
 footer {
-    background: var(--gradient);
+    background-color: #144794;
     padding: 20px 0;
     color: white;
     text-align: center;
