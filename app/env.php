@@ -19,7 +19,7 @@ if($APP_ENV == "PROD"){
 
 } else if ($APP_ENV == "DEV"){
 
-    $env_urlLogo = "http://localhost:9006/assets/tyrolium-ui/projects/Useritium.png";
+    $env_urlLogo = "https://useritium.fr/assets/tyrolium-ui/projects/Useritium.png";
     $env_urlLogoOnglet = $env_urlLogo;
 
     $env_connectUrl = "http://localhost/Useritium-Dashboard/";
