@@ -17,19 +17,20 @@
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 5);
         $output = curl_exec($ch);
 
         if (curl_errno($ch)) {
             $resultGameniumAPI = (object)['message' => 'error'];
+        } else {
+            $resultGameniumAPI = json_decode($output);
+            if (json_last_error() !== JSON_ERROR_NONE) {
+                $resultGameniumAPI = (object)['message' => 'error'];
+            }
         }
 
         curl_close($ch);
-
-        $resultGameniumAPI = json_decode($output);
-
-        if (json_last_error() !== JSON_ERROR_NONE) {
-            $resultGameniumAPI = (object)['message' => 'error'];
-        }
     } catch (Exception $e) {
         $resultGameniumAPI = (object)['message' => 'error'];
     }
