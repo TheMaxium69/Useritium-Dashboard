@@ -40,7 +40,7 @@
     color: #b3b8d4;
     overflow-x: hidden !important;
     position: relative;
-    background-color: #0c1e35;
+    background: var(--gradient-dark);
 }
 .sidebar .image-wrapper {
     position: absolute;
@@ -201,10 +201,10 @@
     color: #dee2ec;
 }
 .layout .sidebar .menu > ul > .sub-menu > .sub-menu-list {
-    background-color: #0b1a2c;
+    background-color: rgba(0, 0, 40, 0.6);
 }
 .layout .sidebar .menu.icon-shape-circle .menu-item a .menu-icon, .layout .sidebar .menu.icon-shape-rounded .menu-item a .menu-icon, .layout .sidebar .menu.icon-shape-square .menu-item a .menu-icon {
-    background-color: #0b1a2c;
+    background-color: rgba(0, 0, 40, 0.6);
 }
 .layout .sidebar .menu.icon-shape-circle .menu-item a .menu-icon {
     border-radius: 50%;
@@ -251,10 +251,10 @@
     background-color: #dee2ec;
 }
 .layout .sidebar.has-bg-image .menu.icon-shape-circle .menu-item a .menu-icon, .layout .sidebar.has-bg-image .menu.icon-shape-rounded .menu-item a .menu-icon, .layout .sidebar.has-bg-image .menu.icon-shape-square .menu-item a .menu-icon {
-    background-color: rgba(11, 26, 44, 0.6);
+    background-color: rgba(0, 0, 40, 0.6);
 }
 .layout .sidebar.has-bg-image:not(.collapsed) .menu > ul > .sub-menu > .sub-menu-list {
-    background-color: rgba(11, 26, 44, 0.6);
+    background-color: rgba(0, 0, 40, 0.6);
 }
 .layout.rtl .sidebar .menu .menu-item a .menu-icon {
     margin-left: 10px;
@@ -285,17 +285,17 @@
 body {
     margin: 0;
     height: 100vh;
-    font-family: "Roboto", sans-serif;
+    font-family: var(--font-body);
     color: #212529;
 }
 
 a {
     text-decoration: none;
-    color: #183153;
+    color: var(--color-blue);
 }
 a:hover {
     text-decoration: none;
-    color: #2e5fa1;
+    color: var(--color-red);
 }
 
 @media (max-width: 992px) {

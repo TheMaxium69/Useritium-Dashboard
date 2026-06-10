@@ -74,15 +74,15 @@ function resultSignup($why, $code, $redirect){
 
     if ($why == 2){
         if ($code == 240){
-            header("location: ". $redirect ."connect.php?err=Erreur de base de donnée");
+            header("location: ". $redirect ."index.php?err=Erreur de base de donnée");
         } else
         if ($code == 241){
-            header("location: ". $redirect ."connect.php?err=Pseudo déjà utiliser");
+            header("location: ". $redirect ."index.php?err=Pseudo déjà utiliser");
         } else
         if ($code == 242){
-            header("location: ". $redirect ."connect.php?err=Champ non remplie");
+            header("location: ". $redirect ."index.php?err=Champ non remplie");
         } else {
-            header("location: ". $redirect ."connect.php?err=code:" . $code );
+            header("location: ". $redirect ."index.php?err=code:" . $code );
         }
     }
 

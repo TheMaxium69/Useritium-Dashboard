@@ -7,22 +7,18 @@ function head($page)
     if(empty($_COOKIE['DesktopApp'])){
 
         //Page
-        if ($page == 1) {
-            $title = "Useritium";
-        } else if ($page == 2) {
+        if ($page == 2) {
             $title = "Useritium - Connexion/Inscription";
         } else if ($page == 3) {
-            $title = "Useritium - Panel";
+            $title = "Useritium - Dashboard";
         } else if ($page == 4) {
             $title = "Useritium - Verification";
         } else if ($page == 5) {
             $title = "Useritium - Mots de passe";
-        } else if ($page == 999999){
-            $title = "Useritium - Mentions Légals";
         } else
 
         {
-            $title = "Useritium - 404 ";
+            $title = "Useritium - 404";
         }
 
     } else {

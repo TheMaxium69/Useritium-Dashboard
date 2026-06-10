@@ -178,14 +178,14 @@ if (!empty($_GET['change'])){
             $img = "sending-emails-84.png";
             $titre = "Mail envoyé";
             $button = "Revenir à la connexion";
-            $buttonUrl = "connect.php";
+            $buttonUrl = "index.php";
 
         } else {
 
             $img = "404-page-not-found-62.png";
             $titre = "Erreur d'envoie de Mail";
             $button = "Revenir à la connexion";
-            $buttonUrl = "connect.php";
+            $buttonUrl = "index.php";
 
         }
 

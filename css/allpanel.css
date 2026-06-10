@@ -9,14 +9,15 @@
     text-transform: uppercase;
     margin-bottom: 30px;
     margin-top: 10px;
-    font-family: 'Montserrat', sans-serif;
+    font-family: var(--font-title);
     letter-spacing: -0.2px;
     font-size: 30px;
-    font-weight: bold;
-    /*color: #AAAEBB;*/
-    /*color: #0c92ff;*/
-    color: #1980d3;
-    text-shadow: 1px 1px 1px #FFF;
+    font-weight: 700;
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: none;
     text-align: center;
 }
 
@@ -124,7 +125,7 @@
     width: 100%;
     padding: 0;
     margin: 0;
-    background-color: #1325d7;
+    background: var(--gradient);
     position: absolute;
     bottom: -100px;
     left: 0;
@@ -149,7 +150,7 @@
 }
 
 .game-back .social li a:hover {
-    color: #1325d7;
+    color: var(--color-blue);
     background-color: #f7f5ec;
 }
 
@@ -167,7 +168,7 @@
     padding: 16px;
     background-color: white;
     text-shadow: 1px 1px 0 #FFF;
-    font-family: 'Montserrat', sans-serif;
+    font-family: var(--font-body);
     letter-spacing: -0.2px;
 }
 .input-morph:focus {
@@ -282,7 +283,7 @@
 .btn-morph.btn-morph-primary {
     display: block;
     width: 80%;
-    color: #0c92ff;
+    color: var(--color-blue);
     margin: auto;
 }
 

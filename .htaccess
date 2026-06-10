@@ -1,0 +1,8 @@
+<IfModule mod_headers.c>
+    Header set X-Robots-Tag "noindex, nofollow"
+</IfModule>
+
+<IfModule mod_rewrite.c>
+    # Remplace l'URL par le lien exact de ta page 404
+    ErrorDocument 404 https://useritium.fr/404
+</IfModule>

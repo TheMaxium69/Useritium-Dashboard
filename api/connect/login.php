@@ -64,15 +64,15 @@ function resultLogin($why, $code, $redirect){
 
     if ($why == 2){
         if ($code == 740){
-            header("location: ". $redirect ."connect.php?err=Mauvais mot de passe");
+            header("location: ". $redirect ."index.php?err=Mauvais mot de passe");
         } else
         if ($code == 741){
-            header("location: ". $redirect ."connect.php?err=Username inexistant");
+            header("location: ". $redirect ."index.php?err=Username inexistant");
         } else
         if ($code == 742){
-            header("location: ". $redirect ."connect.php?err=Champ non remplie");
+            header("location: ". $redirect ."index.php?err=Champ non remplie");
         } else {
-            header("location: ". $redirect ."connect.php?err=code:" . $code );
+            header("location: ". $redirect ."index.php?err=code:" . $code );
         }
     }
 

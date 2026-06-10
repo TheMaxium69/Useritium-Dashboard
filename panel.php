@@ -7,7 +7,7 @@ if($page == 3 && $isLogged == null){
     if (!$appdesktop){
         header("location: index.php");
     } else {
-        header("location: connect.php");
+        header("location: index.php");
     }
 }
 
