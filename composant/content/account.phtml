@@ -189,6 +189,8 @@ require "app/env.php";
 
         <?php
 
+        if ($env_gameniumLink){
+
             try {
                 $url = $env_urlGamenium. 'useritium/' . $_SESSION['userIdLog']; /* CONNECTION A GAMENIUM */
 //                $url = $env_urlGamenium. 'useritium/' . '8';
@@ -229,7 +231,10 @@ require "app/env.php";
                     </h5>
                 </div>
 
-        <?php } ?>
+        <?php }
+
+        }
+        ?>
 
 
         <?php if (!$logGamenium && !$logTyroserv) { ?>
