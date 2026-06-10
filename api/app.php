@@ -32,7 +32,7 @@ require_once "update/skin.php";
 require_once "update/cape.php";
 require_once "update/email.php";
 
-    var_dump($_SESSION);
+//     var_dump($_SESSION);
 if (!empty($_SESSION['userNameLog'])){
     $isLogged = true;
 }

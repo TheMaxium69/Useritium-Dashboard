@@ -1,15 +1,13 @@
 <?php include "app/app.php"; $page = 2; head($page);?>
 <body>
 <?php
-if(!$appdesktop){?><header id="connect-head"> <?php navbar($page, $isLogged); ?> </header><?php } else {
+if(!$appdesktop){?><header id="connect-head"> <?php navbar($page, $isLogged); ?> </header><?php }
 ?>
 <?php
 if ($isLogged) {
-
-    var_dump($_SESSION);
     header("location: panel.php");
 }
-} ?>
+?>
 
 <main id="main-contact">
 
