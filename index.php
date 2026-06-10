@@ -54,8 +54,9 @@ if ($isLogged) {
             <script src="javascript/form.js"></script>
 
 
+            <?php $mobileSignup = (isset($_GET['w']) && $_GET['w'] === 's'); ?>
             <div class="main-mobil">
-                <form id="connectDisplay" method="post" >
+                <form id="connectDisplay" method="post" style="display: <?= $mobileSignup ? 'none' : 'flex' ?>">
                     <h2 class="form_title title" style="margin-bottom: 10px;font-size: 29px;margin-top: 20px;">Connectez-vous</h2>
                     <input class="form__input" type="text" id="username" name="username" placeholder="Username">
                     <input class="form__input" type="password" id="password" name="password" placeholder="Mots de passe">
@@ -71,7 +72,7 @@ if ($isLogged) {
                     </div>
                 </form>
 
-                <form id="createDisplay" method="post" style="display: none">
+                <form id="createDisplay" method="post" style="display: <?= $mobileSignup ? 'flex' : 'none' ?>">
                     <h2 class="form_title title" style="margin-bottom: 10px;font-size: 29px;margin-top: 20px;">Créer un compte</h2>
                     <input class="form__input" type="text" id="username" name="usernameSignUp" placeholder="Username">
                     <input class="form__input" type="email" id="username" name="emailSignUp" placeholder="Email">
