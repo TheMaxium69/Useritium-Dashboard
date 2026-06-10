@@ -32,6 +32,7 @@ require_once "update/skin.php";
 require_once "update/cape.php";
 require_once "update/email.php";
 
+    var_dump($_SESSION);
 if (!empty($_SESSION['userNameLog'])){
     $isLogged = true;
 }
@@ -380,7 +381,7 @@ function sendingMailVerif($email, $idUser, $token)
         <p>Cordialement,</p>
         <p>L\'équipe Useritium</p>
         <div class="footer">
-            <p>&copy; 2024 Tyrolium. Tous droits réservés.</p>
+            <p>&copy; '. date("Y") .' Tyrolium. Tous droits réservés.</p>
         </div>
     </div>
 </body>
@@ -522,7 +523,7 @@ function sendingMailPassword($user)
         <p>Cordialement,</p>
         <p>L\'équipe Useritium</p>
         <div class="footer">
-            <p>&copy; 2024 Tyrolium. Tous droits réservés.</p>
+            <p>&copy; '. date("Y") .' Tyrolium. Tous droits réservés.</p>
         </div>
     </div>
 </body>

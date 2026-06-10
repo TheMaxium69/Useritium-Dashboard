@@ -347,7 +347,7 @@ if (!empty($_GET['change'])){
 
 
 <footer style="background-color: #193554">
-    2024 © <a href="https://tyrolium.fr" target="_bank">TYROLIUM</a>
+    <?= date("Y"); ?> © <a href="https://tyrolium.fr" target="_bank">TYROLIUM</a>
 </footer>
 
 </body> </html>
