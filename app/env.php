@@ -23,8 +23,8 @@ if($APP_ENV == "PROD"){
     $env_urlLogo = "https://useritium.fr/assets/tyrolium-ui/projects/Useritium.png";
     $env_urlLogoOnglet = $env_urlLogo;
 
-    $env_connectUrl = "http://localhost/Useritium-Dashboard/";
-    $env_uploadUrl = "http://localhost/Useritium-Dashboard/uploads/";
+    $env_connectUrl = "http://192.168.1.81/Useritium-Dashboard/";
+    $env_uploadUrl = "http://192.168.1.81/Useritium-Dashboard/uploads/";
     $env_urlGamenium = "https://localhost:8000/";
 
 }

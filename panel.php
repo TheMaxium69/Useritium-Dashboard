@@ -108,21 +108,10 @@ foreach ($yourMail as $mail){
 (function () {
   var relayOrigin = '<?= $relayOrigin ?>';
   var webToken    = '<?= htmlspecialchars($_SESSION['userWebToken'], ENT_QUOTES) ?>';
-  var loginAt     = String(Date.now());
-  var loginAtMs   = parseInt(loginAt, 10);
-  var userData    = JSON.stringify(<?= $relayUser ?>);
-  var frame          = null;
-  var tokenConfirmed = false; // devient true dès qu'on voit le token dans le relay
+  var loginAt  = String(Date.now());
+  var userData = JSON.stringify(<?= $relayUser ?>);
+  var frame = null;
 
-  function checkLogout(data) {
-    var logoutAt = data && data['tyrolium-logout'] ? parseInt(data['tyrolium-logout'], 10) : 0;
-    var hasToken = !!(data && data['tyrolium-token']);
-    console.log('[relay-poll] loginAtMs=' + loginAtMs + ' | logoutAt=' + logoutAt + ' | hasToken=' + hasToken + ' | data=', data);
-    if (hasToken) tokenConfirmed = true;
-    if (logoutAt > loginAtMs || (tokenConfirmed && !hasToken)) window.location.href = 'session-destroy.php';
-  }
-
-  // Iframe principale : écriture des clés au login + détection rapide via storage event
   window.addEventListener('message', function (e) {
     if (e.origin !== relayOrigin || !frame || e.source !== frame.contentWindow) return;
     var d = e.data;
@@ -136,31 +125,12 @@ foreach ($yourMail as $mail){
     }
   });
 
-  // Polling toutes les 5s : iframe temporaire qui lit l'état localStorage courant
-  // Ne dépend pas des storage events ni de relay.html
-  function pollLogout() {
-    var tmp = document.createElement('iframe');
-    tmp.src = relayOrigin + '/relay.html';
-    tmp.style.cssText = 'display:none;position:fixed;width:0;height:0;border:0';
-
-    function onMsg(e) {
-      if (e.origin !== relayOrigin || e.source !== tmp.contentWindow) return;
-      if (!e.data || e.data.type !== 'tyro-relay-init') return;
-      window.removeEventListener('message', onMsg);
-      if (tmp.parentNode) tmp.parentNode.removeChild(tmp);
-      checkLogout(e.data.data);
-    }
-    window.addEventListener('message', onMsg);
-    document.body.appendChild(tmp);
-  }
-
   document.addEventListener('DOMContentLoaded', function () {
     frame = document.createElement('iframe');
     frame.src = relayOrigin + '/relay.html';
     frame.setAttribute('aria-hidden', 'true');
     frame.style.cssText = 'display:none;position:fixed;width:0;height:0;border:0';
     document.body.appendChild(frame);
-    setInterval(pollLogout, 5000);
   });
 })();
 </script>

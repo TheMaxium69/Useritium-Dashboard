@@ -2,7 +2,6 @@
 session_start();
 header('Content-Type: application/json');
 
-// Déjà connecté
 if (!empty($_SESSION['userNameLog'])) {
     echo json_encode(['ok' => false, 'reason' => 'already_logged']);
     exit;
