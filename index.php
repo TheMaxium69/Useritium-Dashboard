@@ -149,10 +149,9 @@ if ($isLogged) {
     <?php } ?>
 
 
-<?php if ($APP_ENV === 'PROD'){ ?>
 <script>
 (function () {
-  var relayOrigin = 'https://tyrolium.fr';
+  var relayOrigin = '<?= $env_relayOrigin ?>';
   var frame = document.createElement('iframe');
   frame.src = relayOrigin + '/relay.html';
   frame.setAttribute('aria-hidden', 'true');
@@ -175,38 +174,5 @@ if ($isLogged) {
   document.addEventListener('DOMContentLoaded', function () { document.body.appendChild(frame); });
 })();
 </script>
-<?php } ?>
-
-
-<?php if ($APP_ENV === 'DEV'){ ?>
-<script>
-(function () {
-  var relayOrigin = 'http://192.168.1.81:9001';
-  var frame = document.createElement('iframe');
-  frame.src = relayOrigin + '/relay.html';
-  frame.setAttribute('aria-hidden', 'true');
-  frame.style.cssText = 'display:none;position:fixed;width:0;height:0;border:0';
-
-  window.addEventListener('message', function (e) {
-    if (e.origin !== relayOrigin) return;
-    var d = e.data;
-    if (d && d.type === 'tyro-relay-init' && d.data && d.data['tyrolium-token']) {
-
-        console.log(d.data['tyrolium-token'])
-
-      fetch('sso/connect.php', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: 'token=' + encodeURIComponent(d.data['tyrolium-token'])
-      })
-      .then(function (r) { return r.json(); })
-      .then(function (data) { if (data.ok) window.location.href = 'panel.php'; });
-    }
-  });
-
-  document.addEventListener('DOMContentLoaded', function () { document.body.appendChild(frame); });
-})();
-</script>
-<?php } ?>
 
 </body> </html>

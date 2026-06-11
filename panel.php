@@ -94,8 +94,7 @@ foreach ($yourMail as $mail){
 <?php sidebarEnd(); ?>
 
 <?php if (!empty($_SESSION['userWebToken'])):
-  $relayOrigin = $APP_ENV === 'DEV' ? 'http://192.168.1.81:9001' : 'https://tyrolium.fr';
-  $relayUser   = json_encode([
+  $relayUser = json_encode([
     'id'          => (int)($_SESSION['userIdLog']     ?? 0),
     'email'       => $_SESSION['userEmailLog']        ?? '',
     'username'    => $_SESSION['userNameLog']         ?? '',
@@ -106,7 +105,7 @@ foreach ($yourMail as $mail){
 ?>
 <script>
 (function () {
-  var relayOrigin = '<?= $relayOrigin ?>';
+  var relayOrigin = '<?= $env_relayOrigin ?>';
   var webToken    = '<?= htmlspecialchars($_SESSION['userWebToken'], ENT_QUOTES) ?>';
   var loginAt  = String(Date.now());
   var userData = JSON.stringify(<?= $relayUser ?>);
