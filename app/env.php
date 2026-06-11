@@ -14,8 +14,8 @@ if($APP_ENV == "PROD"){
     $env_urlLogo = "https://useritium.fr/assets/tyrolium-ui/projects/Useritium.png";
     $env_urlLogoOnglet = $env_urlLogo;
 
-//    $env_relayOrigin = "https://tyrolium.fr";
-    $env_relayOrigin = "http://192.168.1.81:9001";
+    $env_relayOrigin = "https://tyrolium.fr";
+//    $env_relayOrigin = "http://192.168.1.81:9001";
 
     $env_connectUrl = "https://dashboard.useritium.fr/";
     $env_uploadUrl = "https://dashboard.useritium.fr/uploads/";
