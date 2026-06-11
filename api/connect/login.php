@@ -18,14 +18,20 @@ if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['site
                 $userEmail = $value['email'];
                 $userRole = $value['role'];
                 $userPp = $value['pp'];
+                $userWebToken = $value['webtoken'];
             }
             if( md5($passwordEntre).md5($key) == $vraiMotDePasse  ){
+                if (empty($userWebToken)) {
+                    $userWebToken = bin2hex(random_bytes(32));
+                    mysqli_query($ConnectDB, "UPDATE users SET webtoken = '$userWebToken' WHERE id = '$userId'");
+                }
                 $_SESSION["userIdLog"]= $userId;
                 $_SESSION["userNameLog"]= $userName;
                 $_SESSION["userDisNameLog"]= $userDisName;
                 $_SESSION["userEmailLog"]= $userEmail;
                 $_SESSION["userRoleLog"]= $userRole;
                 $_SESSION["userPpLog"]= $userPp;
+                $_SESSION["userWebToken"]= $userWebToken;
 
                 isLog($userId, $userEmail, $userName);
 
