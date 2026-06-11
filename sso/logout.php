@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once 'app/env.php';
+require_once '../app/env.php';
 session_unset();
 session_destroy();
 ?>
@@ -28,7 +28,7 @@ session_destroy();
       frame.contentWindow.postMessage({ type: 'tyro-relay-remove', key: 'tyrolium-token' }, relayOrigin);
       frame.contentWindow.postMessage({ type: 'tyro-relay-remove', key: 'tyrolium-user' }, relayOrigin);
       frame.contentWindow.postMessage({ type: 'tyro-relay-set', key: 'tyrolium-logout', value: now }, relayOrigin);
-      setTimeout(function () { window.location.href = 'index.php'; }, 300);
+      setTimeout(function () { window.location.href = '../index.php'; }, 300);
     }
   });
 
@@ -52,7 +52,7 @@ session_destroy();
       frame.contentWindow.postMessage({ type: 'tyro-relay-remove', key: 'tyrolium-token' }, relayOrigin);
       frame.contentWindow.postMessage({ type: 'tyro-relay-remove', key: 'tyrolium-user' }, relayOrigin);
       frame.contentWindow.postMessage({ type: 'tyro-relay-set', key: 'tyrolium-logout', value: now }, relayOrigin);
-      setTimeout(function () { window.location.href = 'index.php'; }, 300);
+      setTimeout(function () { window.location.href = '../index.php'; }, 300);
     }
   });
 
@@ -60,7 +60,7 @@ session_destroy();
 })();
 </script>
 <?php else: ?>
-<script>window.location.href = 'index.php';</script>
+<script>window.location.href = '../index.php';</script>
 <?php endif; ?>
 </body>
 </html>

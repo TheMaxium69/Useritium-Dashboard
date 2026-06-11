@@ -162,7 +162,7 @@ if ($isLogged) {
     if (e.origin !== relayOrigin) return;
     var d = e.data;
     if (d && d.type === 'tyro-relay-init' && d.data && d.data['tyrolium-token']) {
-      fetch('sso-token.php', {
+      fetch('sso/connect.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: 'token=' + encodeURIComponent(d.data['tyrolium-token'])
@@ -194,7 +194,7 @@ if ($isLogged) {
 
         console.log(d.data['tyrolium-token'])
 
-      fetch('sso-token.php', {
+      fetch('sso/connect.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: 'token=' + encodeURIComponent(d.data['tyrolium-token'])

@@ -121,7 +121,7 @@ foreach ($yourMail as $mail){
       frame.contentWindow.postMessage({ type: 'tyro-relay-set', key: 'tyrolium-user',     value: userData  }, relayOrigin);
     }
     if (d && d.type === 'tyro-relay-changed' && d.key === 'tyrolium-logout') {
-      window.location.href = 'session-destroy.php';
+      window.location.href = 'sso/destroy.php';
     }
   });
 

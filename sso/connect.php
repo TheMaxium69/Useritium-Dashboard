@@ -12,7 +12,7 @@ if (empty($_POST['token'])) {
     exit;
 }
 
-require_once 'api/private/db.php';
+require_once '../api/private/db.php';
 $conn = mysqli_connect($host, $userDB, $passDB, $Database);
 
 if (!$conn) {
