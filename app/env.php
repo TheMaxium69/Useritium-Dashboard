@@ -12,7 +12,6 @@ $env_gameniumLink = false;
 if($APP_ENV == "PROD"){
 
     $env_urlLogo = "https://useritium.fr/assets/tyrolium-ui/projects/Useritium.png";
-    $env_urlLogoOnglet = $env_urlLogo;
 
     $env_relayOrigin = "https://tyrolium.fr";
 //    $env_relayOrigin = "http://192.168.1.81:9001";
@@ -24,7 +23,6 @@ if($APP_ENV == "PROD"){
 } else if ($APP_ENV == "DEV"){
 
     $env_urlLogo = "https://useritium.fr/assets/tyrolium-ui/projects/Useritium.png";
-    $env_urlLogoOnglet = $env_urlLogo;
 
     $env_relayOrigin = "http://192.168.1.81:9001";
 

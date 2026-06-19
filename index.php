@@ -21,6 +21,10 @@ if ($isLogged) {
                         <input class="form__input" type="email" name="emailSignUp" placeholder="Email">
                         <input class="form__input" type="password" name="passwordSignUp" placeholder="Mots de passe">
                         <input type="hidden" name="site" value="<?= $env_connectUrl ?>">
+                        <div class="cgu-check">
+                            <input type="checkbox" id="cguDesktop" name="cgu" required>
+                            <label for="cguDesktop">J'accepte les <a href="https://tyrolium.fr/legal/cgu" target="_blank">CGU</a></label>
+                        </div>
                         <input class="form__button button" type="submit" value="S'INSCRIRE">
                     </form>
                 </div>
@@ -78,6 +82,10 @@ if ($isLogged) {
                     <input class="form__input" type="email" id="username" name="emailSignUp" placeholder="Email">
                     <input class="form__input" type="password" id="password" name="passwordSignUp" placeholder="Mots de passe">
                     <input type="hidden" name="site" value="<?= $env_connectUrl ?>">
+                    <div class="cgu-check">
+                        <input type="checkbox" id="cguMobile" name="cgu" required>
+                        <label for="cguMobile">J'accepte les <a href="https://tyrolium.fr/legal/cgu" target="_blank">CGU</a></label>
+                    </div>
                     <div id="button">
                         <input class="switch__button" type="submit" value="S'inscrire">
                         <span class="rip1"></span>
@@ -113,6 +121,39 @@ if ($isLogged) {
 <style>
 
     header#connect-head {
+    }
+
+    .cgu-check {
+        margin: 8px 0;
+        font-size: 13px;
+        color: #555;
+        line-height: 1;
+    }
+
+    .cgu-check input[type="checkbox"] {
+        width: 15px;
+        height: 15px;
+        cursor: pointer;
+        accent-color: #393939;
+        vertical-align: middle;
+        margin: 0 6px 0 0;
+        display: inline;
+    }
+
+    .cgu-check label {
+        cursor: pointer;
+        user-select: none;
+        vertical-align: middle;
+        display: inline;
+    }
+
+    .cgu-check a {
+        color: #393939;
+        text-decoration: underline;
+    }
+
+    .cgu-check a:hover {
+        color: #000;
     }
 </style>
 
