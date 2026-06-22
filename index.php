@@ -162,7 +162,7 @@ if ($isLogged) {
 
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>
     <script src='https://unpkg.com/izitoast/dist/js/iziToast.min.js'></script>
-    <script  src="https://tyrolium.fr/javascript/notif.js"></script>
+    <script  src="javascript/notif.js"></script>
 
 
     <?php if (!empty($_GET['err'])) { ?>
@@ -192,27 +192,39 @@ if ($isLogged) {
 
 <script>
 (function () {
-  var relayOrigin = '<?= $env_relayOrigin ?>';
-  var frame = document.createElement('iframe');
-  frame.src = relayOrigin + '/relay.html';
-  frame.setAttribute('aria-hidden', 'true');
-  frame.style.cssText = 'display:none;position:fixed;width:0;height:0;border:0';
+  var SSO_URL  = 'https://sso.tyrolium.fr';
+  var UUID_KEY = '_tyro_uuid';
 
-  window.addEventListener('message', function (e) {
-    if (e.origin !== relayOrigin) return;
-    var d = e.data;
-    if (d && d.type === 'tyro-relay-init' && d.data && d.data['tyrolium-token']) {
-      fetch('sso/connect.php', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: 'token=' + encodeURIComponent(d.data['tyrolium-token'])
-      })
-      .then(function (r) { return r.json(); })
-      .then(function (data) { if (data.ok) window.location.href = 'panel.php'; });
-    }
-  });
+  var params  = new URLSearchParams(window.location.search);
+  var urlUuid = params.get(UUID_KEY);
+  if (urlUuid) {
+    localStorage.setItem(UUID_KEY, urlUuid);
+    params.delete(UUID_KEY);
+    var qs = params.toString();
+    window.history.replaceState({}, '', window.location.pathname + (qs ? '?' + qs : '') + window.location.hash);
+  }
 
-  document.addEventListener('DOMContentLoaded', function () { document.body.appendChild(frame); });
+  var uuid = localStorage.getItem(UUID_KEY);
+
+  if (!uuid) {
+    window.location.href = SSO_URL + '/hub?return=' + encodeURIComponent(window.location.href);
+    return;
+  }
+
+  fetch(SSO_URL + '/state?uuid=' + encodeURIComponent(uuid))
+    .then(function (r) { return r.json(); })
+    .then(function (data) {
+      if (data.status === 'ok' && data.data && data.data.token) {
+        return fetch('sso/connect.php', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: 'token=' + encodeURIComponent(data.data.token)
+        });
+      }
+    })
+    .then(function (r) { if (r) return r.json(); })
+    .then(function (res) { if (res && res.ok) window.location.href = 'panel.php'; })
+    .catch(function () {});
 })();
 </script>
 

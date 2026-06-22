@@ -27,7 +27,9 @@ session_destroy();
   <div class="spinner"></div>
 <script>
 (function () {
-  var relayOrigin = '<?= $env_relayOrigin ?>';
+  var SSO_URL  = 'https://sso.tyrolium.fr';
+  var UUID_KEY = '_tyro_uuid';
+  var uuid = localStorage.getItem(UUID_KEY);
   var done = false;
 
   function redirect() {
@@ -36,34 +38,18 @@ session_destroy();
     window.location.href = '../index.php';
   }
 
-  var frame = document.createElement('iframe');
-  frame.src = relayOrigin + '/relay.html';
-  frame.setAttribute('aria-hidden', 'true');
-  frame.style.cssText = 'display:none;position:fixed;width:0;height:0;border:0';
-
-  // Fallback : si le relay ne répond pas dans les 5s, on redirige quand même
-  var fallback = setTimeout(redirect, 5000);
-
-  window.addEventListener('message', function (e) {
-    if (e.origin !== relayOrigin) return;
-    var d = e.data;
-    if (d && d.type === 'tyro-relay-init') {
-      clearTimeout(fallback);
-      var now = Date.now().toString();
-      frame.contentWindow.postMessage({ type: 'tyro-relay-remove', key: 'tyrolium-token' }, relayOrigin);
-      frame.contentWindow.postMessage({ type: 'tyro-relay-remove', key: 'tyrolium-user' }, relayOrigin);
-      frame.contentWindow.postMessage({ type: 'tyro-relay-set', key: 'tyrolium-logout', value: now }, relayOrigin);
-      setTimeout(redirect, 300);
-    }
-  });
-
-  // Si l'iframe échoue à charger (CORS, serveur down), on redirige immédiatement
-  frame.onerror = function () {
-    clearTimeout(fallback);
+  if (uuid) {
+    fetch(SSO_URL + '/state', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams({ uuid: uuid, key: 'token', value: '' }).toString(),
+    })
+    .then(redirect)
+    .catch(redirect);
+    setTimeout(redirect, 3000);
+  } else {
     redirect();
-  };
-
-  document.body.appendChild(frame);
+  }
 })();
 </script>
 </body>

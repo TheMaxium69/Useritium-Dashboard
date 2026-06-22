@@ -51,7 +51,7 @@ foreach ($yourMail as $mail){
 
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>
     <script src='https://unpkg.com/izitoast/dist/js/iziToast.min.js'></script>
-    <script  src="https://tyrolium.fr/javascript/notif.js"></script>
+    <script  src="javascript/notif.js"></script>
 
     <?php if (!empty($_GET['true'])) {?>
         <script>
@@ -93,44 +93,35 @@ foreach ($yourMail as $mail){
 
 <?php sidebarEnd(); ?>
 
-<?php if (!empty($_SESSION['userWebToken'])):
-  $relayUser = json_encode([
-    'id'          => (int)($_SESSION['userIdLog']     ?? 0),
-    'email'       => $_SESSION['userEmailLog']        ?? '',
-    'username'    => $_SESSION['userNameLog']         ?? '',
-    'displayname' => $_SESSION['userDisNameLog']      ?? null,
-    'pp'          => $_SESSION['userPpLog']           ?? null,
-    'webToken'    => $_SESSION['userWebToken']        ?? '',
-  ]);
-?>
+<?php if (!empty($_SESSION['userWebToken'])): ?>
 <script>
 (function () {
-  var relayOrigin = '<?= $env_relayOrigin ?>';
-  var webToken    = '<?= htmlspecialchars($_SESSION['userWebToken'], ENT_QUOTES) ?>';
-  var loginAt  = String(Date.now());
-  var userData = JSON.stringify(<?= $relayUser ?>);
-  var frame = null;
+  var SSO_URL  = 'https://sso.tyrolium.fr';
+  var UUID_KEY = '_tyro_uuid';
+  var webToken = '<?= htmlspecialchars($_SESSION['userWebToken'], ENT_QUOTES) ?>';
+  var uuid = localStorage.getItem(UUID_KEY);
+  if (!uuid) return;
 
-  window.addEventListener('message', function (e) {
-    if (e.origin !== relayOrigin || !frame || e.source !== frame.contentWindow) return;
-    var d = e.data;
-    if (d && d.type === 'tyro-relay-init') {
-      frame.contentWindow.postMessage({ type: 'tyro-relay-set', key: 'tyrolium-login-at', value: loginAt }, relayOrigin);
-      frame.contentWindow.postMessage({ type: 'tyro-relay-set', key: 'tyrolium-token',    value: webToken  }, relayOrigin);
-      frame.contentWindow.postMessage({ type: 'tyro-relay-set', key: 'tyrolium-user',     value: userData  }, relayOrigin);
-    }
-    if (d && d.type === 'tyro-relay-changed' && d.key === 'tyrolium-logout') {
-      window.location.href = 'sso/destroy.php';
-    }
-  });
+  function ssoPost(key, value) {
+    fetch(SSO_URL + '/state', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams({ uuid: uuid, key: key, value: value || '' }).toString(),
+    }).catch(function () {});
+  }
 
-  document.addEventListener('DOMContentLoaded', function () {
-    frame = document.createElement('iframe');
-    frame.src = relayOrigin + '/relay.html';
-    frame.setAttribute('aria-hidden', 'true');
-    frame.style.cssText = 'display:none;position:fixed;width:0;height:0;border:0';
-    document.body.appendChild(frame);
-  });
+  ssoPost('token', webToken);
+
+  setInterval(function () {
+    fetch(SSO_URL + '/state?uuid=' + encodeURIComponent(uuid))
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        if (data.status === 'ok' && !data.data.token) {
+          window.location.href = 'sso/destroy.php';
+        }
+      })
+      .catch(function () {});
+  }, 15000);
 })();
 </script>
 <?php endif; ?>

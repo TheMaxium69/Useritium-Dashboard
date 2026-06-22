@@ -330,7 +330,7 @@ if (!empty($_GET['change'])){
 
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>
 <script src='https://unpkg.com/izitoast/dist/js/iziToast.min.js'></script>
-<script  src="https://tyrolium.fr/javascript/notif.js"></script>
+<script  src="javascript/notif.js"></script>
 
 
 <?php if (!empty($_GET['err'])) { ?>
