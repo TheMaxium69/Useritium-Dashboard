@@ -3,6 +3,20 @@
 </IfModule>
 
 <IfModule mod_rewrite.c>
-    # Remplace l'URL par le lien exact de ta page 404
-    ErrorDocument 404 https://useritium.fr/404
+  RewriteEngine On
+
+  # ==========================================
+  # 1. FORCER LE HTTPS (Optimisé OVH)
+  # ==========================================
+  RewriteCond %{HTTPS} off
+  RewriteCond %{HTTP:X-Forwarded-Proto} !https
+  RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 </IfModule>
+
+# ==========================================
+# 2. SÉCURITÉ ET FALLBACK (404 & 403)
+# ==========================================
+Options -Indexes
+
+ErrorDocument 404 https://useritium.fr/404
+ErrorDocument 403 https://useritium.fr/403
