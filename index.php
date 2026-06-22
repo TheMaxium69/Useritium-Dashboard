@@ -171,7 +171,7 @@ if ($isLogged) {
                 iziToast.error({
                     title: 'Erreur',
                     position: 'bottomCenter',
-                    message: ' <?php echo $_GET['err']; ?>'
+                    message: <?php echo json_encode($_GET['err']); ?>
                 });
             }
         </script>
@@ -183,7 +183,7 @@ if ($isLogged) {
                 iziToast.success({
                     title: 'Succès',
                     position: 'bottomCenter',
-                    message: '<?php echo $_GET['true']; ?>'
+                    message: <?php echo json_encode($_GET['true']); ?>
                 });
             }
         </script>

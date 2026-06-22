@@ -59,7 +59,7 @@ foreach ($yourMail as $mail){
                 iziToast.success({
                     title: 'Succès',
                     position: 'bottomRight',
-                    message: '<?php echo $_GET['true']; ?>'
+                    message: <?php echo json_encode($_GET['true']); ?>
                 });
             }
         </script>
@@ -71,7 +71,7 @@ foreach ($yourMail as $mail){
                 iziToast.error({
                     title: 'Erreur',
                     position: 'bottomCenter',
-                    message: ' <?php echo $_GET['err']; ?>'
+                    message: <?php echo json_encode($_GET['err']); ?>
                 });
             }
         </script>
