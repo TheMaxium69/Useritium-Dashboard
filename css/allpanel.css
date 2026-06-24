@@ -3,6 +3,7 @@
     height: 25px;
     margin-top: -3px;
     margin-left: 2px;
+    object-fit: contain;
 }
 
 .title-morph{
@@ -62,7 +63,9 @@
 }
 
 .game-back .picture {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     height: 130px;
     width: 130px;
     margin-bottom: 50px;
